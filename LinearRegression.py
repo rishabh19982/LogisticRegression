@@ -6,10 +6,11 @@ from utility import * #custom methods for data cleaning
 
 FILE_NAME_TRAIN = 'cleaned_train.csv' #replace this file name with the train file
 FILE_NAME_TEST = 'cleaned_test.csv' #replace
-ALPHA = 1e-1
-EPOCHS = 300000#keep this greater than or equl to 5000 strictly otherwise you will get an error
+ALPHA = 12e0
+EPOCHS =75000#keep this greater than or equl to 5000 strictly otherwise you will get an error
 MODEL_FILE = 'models/model1'
-train_flag = False
+train_flag = True
+
 
 logging.basicConfig(filename='output.log',level=logging.DEBUG)
 
@@ -104,8 +105,7 @@ def main():
 		model = train(theta, X, y_df, model)
 		with open(MODEL_FILE,'w') as f:
 			f.write(json.dumps(model))
-		
-	else:
+	if(train_flag):
 		model = {}
 		with open(MODEL_FILE,'r') as f:
 			model = json.loads(f.read())
